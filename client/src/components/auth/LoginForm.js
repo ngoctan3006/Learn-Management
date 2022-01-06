@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState, useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 
@@ -9,7 +9,7 @@ const LoginForm = () => {
     const { loginUser } = useContext(AuthContext)
 
     // Router
-    const navigate = useNavigate()
+    const history = useHistory()
 
     // Local state
     const [loginForm, setLoginForm] = useState({
@@ -31,8 +31,7 @@ const LoginForm = () => {
         try {
             const loginData = await loginUser(loginForm)
             if(loginData.success) {
-                console.log('login success')
-                navigate('/dashboard')
+                history.push('/dashboard')
             } else {}
         } catch (err) {
             console.log(err)

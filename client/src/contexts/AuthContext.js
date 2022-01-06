@@ -52,6 +52,7 @@ const AuthContextProvider = ({ children }) => {
             if (response.data.success) {
                 localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, response.data.accessToken)
             }
+            await loadUser()
             return response.data
         } catch (err) {
             if (err.response.data) return err.response.data

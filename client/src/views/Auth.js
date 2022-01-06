@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import LoginForm from '../components/auth/LoginForm'
 import RegisterForm from '../components/auth/RegisterForm'
@@ -15,7 +15,7 @@ const Auth = ({ authRoute }) => {
             </div>
         )
     } else if (isAuthenticated) {
-        return <Navigate to='/dashboard' />
+        return <Redirect to='/dashboard' />
     } else {
         body = (
             <>

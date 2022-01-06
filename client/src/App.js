@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import Landing from './components/layout/Landing'
 import Auth from './views/Auth'
@@ -10,17 +10,24 @@ const App = () => {
     return (
         <AuthContextProvider>
             <Router>
-                <Routes>
-                    <Route path='/' element={<Landing />} />
-                    <Route path='/login' element={<Auth authRoute='login' />} />
-                    <Route path='/register' element={<Auth authRoute='register' />} />
-                    {/* <Route path='/dashboard' element={
-                        <ProtectedRoute redirecTo='/login'>
-                            <Dashboard />
-                        </ProtectedRoute>
-                    } /> */}
-                    <Route path='/dashboard' element={<Dashboard />} />
-                </Routes>
+                <Switch>
+                    <Route
+                        exact
+                        path='/'
+                        component={Landing}
+                    />
+                    <Route
+                        exact
+                        path='/login'
+                        render={props => <Auth {...props} authRoute='login' />}
+                    />
+                    <Route
+                        exact
+                        path='/register'
+                        render={props => <Auth {...props} authRoute='register' />}
+                    />
+                    <Route exact path='/dashboard' component={Dashboard} />
+                </Switch>
             </Router>
         </AuthContextProvider>
     )
