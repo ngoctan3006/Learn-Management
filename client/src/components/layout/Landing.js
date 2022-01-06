@@ -1,7 +1,7 @@
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 const Landing = () => {
-    return <Redirect to='/login' />
+    return <Navigate to='/login' />
 }
 
 export default Landing

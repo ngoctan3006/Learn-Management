@@ -1,9 +1,9 @@
-import { Route, Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import Spinner from 'react-bootstrap/Spinner'
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+const ProtectedRoute = ({ children, redirecTo }) => {
     const { authState: { authLoading, isAuthenticated } } = useContext(AuthContext)
     if (authLoading) {
         return (
@@ -13,20 +13,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         )
     }
 
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                isAuthenticated ? (
-                    <>
-                        <Component {...rest} {...props} />
-                    </>
-                ) : (
-                    <Redirect to='/login' />
-                )
-            }
-        />
-    )
+    return isAuthenticated ? children : <Navigate to={redirecTo} />
 }
 
 export default ProtectedRoute
