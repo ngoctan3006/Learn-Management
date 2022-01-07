@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import Spinner from 'react-bootstrap/Spinner'
+import NavbarMenu from '../layout/NavbarMenu'
 
 const ProtectedRoute = ({ children, redirecTo }) => {
     const { authState: { authLoading, isAuthenticated } } = useContext(AuthContext)
@@ -13,7 +14,12 @@ const ProtectedRoute = ({ children, redirecTo }) => {
         )
     }
 
-    return isAuthenticated ? children : <Navigate to={redirecTo} />
+    return isAuthenticated ? (
+        <>
+            <NavbarMenu />
+            {children}
+        </>
+    ) : <Navigate to={redirecTo} />
 }
 
 export default ProtectedRoute

@@ -29,8 +29,7 @@ const LoginForm = () => {
 
         try {
             const loginData = await loginUser(loginForm)
-            if(loginData.success) {
-            } else {
+            if(!loginData.success) {
                 setAlert({
                     type: 'danger',
                     message: loginData.message
@@ -45,7 +44,6 @@ const LoginForm = () => {
     return (
         <>
             <Form className='my-4' onSubmit={login}>
-                <AlertMessage info={alert} />
                 <Form.Group className='mb-3'>
                     <Form.Control
                         type='text'
@@ -66,12 +64,13 @@ const LoginForm = () => {
                         onChange={onChangeLoginForm}
                     />
                 </Form.Group>
+                <AlertMessage info={alert} />
                 <Button variant='success' type='submit'>Login</Button>
             </Form>
             <p>
                 Don't have an account?
                 <Link to='/register'>
-                    <Button variant='info' size='sm' className='ml-2'>Register</Button>
+                    <Button variant='info' size='sm' className='ms-2'>Register</Button>
                 </Link>
             </p>
         </>
