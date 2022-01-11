@@ -46,38 +46,49 @@ const AuthContextProvider = ({ children }) => {
     useEffect(() => loadUser(), [])
 
     // Login
-    const loginUser = async userForm => {
+    const loginUser = async (userForm) => {
         try {
             const response = await axios.post(`${apiUrl}/auth/login`, userForm)
             if (response.data.success) {
-                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, response.data.accessToken)
+                localStorage.setItem(
+                    LOCAL_STORAGE_TOKEN_NAME,
+                    response.data.accessToken
+                )
             }
             await loadUser()
             return response.data
         } catch (err) {
             if (err.response.data) return err.response.data
-            else return {
-                success: false,
-                message: err.message
-            }
+            else
+                return {
+                    success: false,
+                    message: err.message
+                }
         }
     }
 
     // Register
-    const registerUser = async userForm => {
+    const registerUser = async (userForm) => {
         try {
-            const response = await axios.post(`${apiUrl}/auth/register`, userForm)
+            const response = await axios.post(
+                `${apiUrl}/auth/register`,
+                userForm
+            )
             if (response.data.success) {
-                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, response.data.accessToken)
+                localStorage.setItem(
+                    LOCAL_STORAGE_TOKEN_NAME,
+                    response.data.accessToken
+                )
             }
             await loadUser()
             return response.data
         } catch (err) {
             if (err.response.data) return err.response.data
-            else return {
-                success: false,
-                message: err.message
-            }
+            else
+                return {
+                    success: false,
+                    message: err.message
+                }
         }
     }
 

@@ -17,19 +17,19 @@ const LoginForm = () => {
     const [alert, setAlert] = useState(null)
 
     const { username, password } = loginForm
-    const onChangeLoginForm = event => {
+    const onChangeLoginForm = (event) => {
         setLoginForm({
             ...loginForm,
             [event.target.name]: event.target.value
         })
     }
 
-    const login = async event => {
+    const login = async (event) => {
         event.preventDefault()
 
         try {
             const loginData = await loginUser(loginForm)
-            if(!loginData.success) {
+            if (!loginData.success) {
                 setAlert({
                     type: 'danger',
                     message: loginData.message
@@ -65,12 +65,16 @@ const LoginForm = () => {
                     />
                 </Form.Group>
                 <AlertMessage info={alert} />
-                <Button variant='success' type='submit'>Login</Button>
+                <Button variant='success' type='submit'>
+                    Login
+                </Button>
             </Form>
             <p>
                 Don't have an account?
                 <Link to='/register'>
-                    <Button variant='info' size='sm' className='ms-2'>Register</Button>
+                    <Button variant='info' size='sm' className='ms-2'>
+                        Register
+                    </Button>
                 </Link>
             </p>
         </>

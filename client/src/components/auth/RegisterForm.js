@@ -18,14 +18,14 @@ const RegisterForm = () => {
     const [alert, setAlert] = useState(null)
 
     const { username, password, confirmPassword } = registerForm
-    const onChangeRegisterForm = event => {
+    const onChangeRegisterForm = (event) => {
         setRegisterForm({
             ...registerForm,
             [event.target.name]: event.target.value
         })
     }
 
-    const register = async event => {
+    const register = async (event) => {
         event.preventDefault()
 
         if (password !== confirmPassword) {
@@ -85,12 +85,16 @@ const RegisterForm = () => {
                     />
                 </Form.Group>
                 <AlertMessage info={alert} />
-                <Button variant='success' type='submit'>Register</Button>
+                <Button variant='success' type='submit'>
+                    Register
+                </Button>
             </Form>
             <p>
                 Already have an account?
                 <Link to='/login'>
-                    <Button variant='info' size='sm' className='ms-2'>Login</Button>
+                    <Button variant='info' size='sm' className='ms-2'>
+                        Login
+                    </Button>
                 </Link>
             </p>
         </>

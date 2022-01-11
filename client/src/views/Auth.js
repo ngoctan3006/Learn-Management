@@ -1,21 +1,23 @@
 import { useContext } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import LoginForm from '../components/auth/LoginForm'
 import RegisterForm from '../components/auth/RegisterForm'
 import { AuthContext } from '../contexts/AuthContext'
 
 const Auth = ({ authRoute }) => {
-    const { authState: { authLoading, isAuthenticated } } = useContext(AuthContext)
+    const {
+        authState: { authLoading, isAuthenticated }
+    } = useContext(AuthContext)
     let body
     if (authLoading) {
         body = (
-            <div className="d-flex justify-content-center mt-2">
+            <div className='d-flex justify-content-center mt-2'>
                 <Spinner animation='border' variant='info' />
             </div>
         )
     } else if (isAuthenticated) {
-        return <Navigate to='/dashboard' />
+        return <Redirect to='/dashboard' />
     } else {
         body = (
             <>
@@ -26,9 +28,9 @@ const Auth = ({ authRoute }) => {
     }
 
     return (
-        <div className="landing">
-            <div className="dark-overlay">
-                <div className="landing-inner">
+        <div className='landing'>
+            <div className='dark-overlay'>
+                <div className='landing-inner'>
                     <h1>LearnIt</h1>
                     <h4>Keep track of what are you learning</h4>
                     {body}
