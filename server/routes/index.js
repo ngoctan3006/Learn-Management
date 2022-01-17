@@ -7,7 +7,7 @@ const route = (app) => {
 
     app.use('/', (req, res) => {
         res.send(
-            "<div style='display:flex;justify-content:center;align-items:center;height:100vh;color:red;font-size:5rem'><h1>Hi, I'm Tân!! ❤️❤️❤️</h1></div>"
+            "<div style='text-align:center;display:flex;justify-content:center;align-items:center;height:100vh;color:red;font-size:5rem'><h1>Hi, I'm Tân!! ❤️❤️❤️</h1></div>"
         );
     });
 };
