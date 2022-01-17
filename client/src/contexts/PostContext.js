@@ -5,19 +5,24 @@ import {
     ADD_POST,
     apiUrl,
     DELETE_POST,
+    FIND_POST,
     POSTS_LOADED_FAIL,
-    POSTS_LOADED_SUCCESS
+    POSTS_LOADED_SUCCESS,
+    UPDATE_POST
 } from './constants';
 
 export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
     const [postState, dispatch] = useReducer(postReducer, {
+        post: null,
         posts: [],
         postsLoading: true
     });
 
     const [showAddPostModal, setShowAddPostModal] = useState(false);
+    const [showUpdatePostModal, setShowUpdatePostModal] = useState(false);
+
     const [showToast, setShowToast] = useState({
         show: false,
         message: '',
@@ -69,15 +74,41 @@ const PostContextProvider = ({ children }) => {
         }
     };
 
+    const findPost = (postId) => {
+        const post = postState.posts.find((post) => post._id === postId);
+        dispatch({ type: FIND_POST, payload: post });
+    };
+
+    const updatePost = async (updatedPost) => {
+        try {
+            const response = await axios.put(
+                `${apiUrl}/posts/edit/${updatedPost._id}`,
+                updatedPost
+            );
+            if (response.data.success) {
+                dispatch({ type: UPDATE_POST, payload: response.data.post });
+                return response.data;
+            }
+        } catch (error) {
+            return error.response.data
+                ? error.response.data
+                : { success: false, message: 'Server error' };
+        }
+    };
+
     const postContextData = {
         postState,
         getPosts,
         showAddPostModal,
         setShowAddPostModal,
+        showUpdatePostModal,
+        setShowUpdatePostModal,
         addPost,
         showToast,
         setShowToast,
-        deletePost
+        deletePost,
+        updatePost,
+        findPost
     };
 
     return (

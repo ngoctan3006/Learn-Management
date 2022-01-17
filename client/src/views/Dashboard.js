@@ -1,17 +1,18 @@
 import { useContext, useEffect } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-import { PostContext } from '../contexts/PostContext';
 import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import SinglePost from '../components/posts/SinglePost';
 import AddPostModal from '../components/posts/AddPostModal';
 import addIcon from '../assets/plus-circle-fill.svg';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
+import UpdatePostModal from '../components/posts/UpdatePostModal';
+import { AuthContext } from '../contexts/AuthContext';
+import { PostContext } from '../contexts/PostContext';
 
 const Dashboard = () => {
     const {
@@ -21,7 +22,7 @@ const Dashboard = () => {
     } = useContext(AuthContext);
 
     const {
-        postState: { posts, postsLoading },
+        postState: { post, posts, postsLoading },
         getPosts,
         setShowAddPostModal,
         showToast: { show, message, type },
@@ -91,6 +92,7 @@ const Dashboard = () => {
         <>
             {body}
             <AddPostModal />
+            {post && <UpdatePostModal />}
             <Toast
                 show={show}
                 style={{ position: 'fixed', top: '20%', right: '10px' }}
