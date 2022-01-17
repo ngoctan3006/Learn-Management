@@ -1,55 +1,55 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { Link } from 'react-router-dom'
-import { useState, useContext } from 'react'
-import { AuthContext } from '../../contexts/AuthContext'
-import AlertMessage from '../layout/AlertMessage'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import AlertMessage from '../layout/AlertMessage';
 
 const RegisterForm = () => {
     // Context
-    const { registerUser } = useContext(AuthContext)
+    const { registerUser } = useContext(AuthContext);
 
     // Local state
     const [registerForm, setRegisterForm] = useState({
         username: '',
         password: '',
         confirmPassword: ''
-    })
-    const [alert, setAlert] = useState(null)
+    });
+    const [alert, setAlert] = useState(null);
 
-    const { username, password, confirmPassword } = registerForm
+    const { username, password, confirmPassword } = registerForm;
     const onChangeRegisterForm = (event) => {
         setRegisterForm({
             ...registerForm,
             [event.target.name]: event.target.value
-        })
-    }
+        });
+    };
 
     const register = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         if (password !== confirmPassword) {
             setAlert({
                 type: 'danger',
                 message: 'Password do not match'
-            })
-            setTimeout(() => setAlert(null), 5000)
-            return
+            });
+            setTimeout(() => setAlert(null), 5000);
+            return;
         }
 
         try {
-            const registerData = await registerUser(registerForm)
+            const registerData = await registerUser(registerForm);
             if (!registerData.success) {
                 setAlert({
                     type: 'danger',
                     message: registerData.message
-                })
-                setTimeout(() => setAlert(null), 5000)
+                });
+                setTimeout(() => setAlert(null), 5000);
             }
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-    }
+    };
 
     return (
         <>
@@ -98,7 +98,7 @@ const RegisterForm = () => {
                 </Link>
             </p>
         </>
-    )
-}
+    );
+};
 
-export default RegisterForm
+export default RegisterForm;

@@ -1,6 +1,6 @@
-import Button from 'react-bootstrap/Button'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const About = () => {
     return (
@@ -15,7 +15,7 @@ const About = () => {
                 </Button>
             </Col>
         </Row>
-    )
-}
+    );
+};
 
-export default About
+export default About;

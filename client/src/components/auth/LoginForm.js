@@ -1,45 +1,45 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { Link } from 'react-router-dom'
-import { useState, useContext } from 'react'
-import { AuthContext } from '../../contexts/AuthContext'
-import AlertMessage from '../layout/AlertMessage'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import AlertMessage from '../layout/AlertMessage';
 
 const LoginForm = () => {
     // Context
-    const { loginUser } = useContext(AuthContext)
+    const { loginUser } = useContext(AuthContext);
 
     // Local state
     const [loginForm, setLoginForm] = useState({
         username: '',
         password: ''
-    })
-    const [alert, setAlert] = useState(null)
+    });
+    const [alert, setAlert] = useState(null);
 
-    const { username, password } = loginForm
+    const { username, password } = loginForm;
     const onChangeLoginForm = (event) => {
         setLoginForm({
             ...loginForm,
             [event.target.name]: event.target.value
-        })
-    }
+        });
+    };
 
     const login = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         try {
-            const loginData = await loginUser(loginForm)
+            const loginData = await loginUser(loginForm);
             if (!loginData.success) {
                 setAlert({
                     type: 'danger',
                     message: loginData.message
-                })
-                setTimeout(() => setAlert(null), 5000)
+                });
+                setTimeout(() => setAlert(null), 5000);
             }
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-    }
+    };
 
     return (
         <>
@@ -78,7 +78,7 @@ const LoginForm = () => {
                 </Link>
             </p>
         </>
-    )
-}
+    );
+};
 
-export default LoginForm
+export default LoginForm;
